@@ -11,4 +11,3 @@ public class Main {
 		Lemme2ARFF l2a = new Lemme2ARFF(projectPath+"/lemmatisation",projectPath+"/resultLemme.arff");
 	}
 }
-

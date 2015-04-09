@@ -16,8 +16,18 @@ import java.util.ArrayList;
 public class Lemme2ARFF {
 
 	public String  arffContent;
+	public ArrayList<String> typesValides;
 	
 	public Lemme2ARFF(String foldersPath, String targetPath){
+		
+		typesValides = new ArrayList<String>();
+		typesValides.add("NN");
+		typesValides.add("NNS");
+		typesValides.add("VB");
+		typesValides.add("VBN");
+		typesValides.add("VBD");
+		typesValides.add("VBG");
+		
 		arffContent = "% Ceci représente la classification de séries en fonction de leur genre.";
 		arffContent += "\n\n@relation series";
 		arffContent += "\n\n@attribute nom_fichier string";
@@ -45,7 +55,13 @@ public class Lemme2ARFF {
 					while (ligne != null)
 					{
 						String[] triplet = ligne.split("\t");
-						fileContent = fileContent + triplet[triplet.length-1] + " ";
+						
+						if (motValide(triplet))
+						{
+							fileContent = fileContent + triplet[triplet.length-1] + " ";
+						}
+						
+						
 						ligne = bf.readLine();
 					}
 					
@@ -84,12 +100,11 @@ public class Lemme2ARFF {
 
 	}
 	
-	static String readFile(String path, Charset encoding) 
-			  throws IOException 
-			{
-			  byte[] encoded = Files.readAllBytes(Paths.get(path));
-			  return new String(encoded, encoding);
-			}
+	static String readFile(String path, Charset encoding) throws IOException 
+	{
+	  byte[] encoded = Files.readAllBytes(Paths.get(path));
+	  return new String(encoded, encoding);
+	}
 	
 	public static File[] getListOfFiles(String folderPath){
 		File folder = new File(folderPath);
@@ -105,4 +120,10 @@ public class Lemme2ARFF {
 	    
 	    return listOfFiles;
 	}
+	
+	public boolean motValide(String[] triplet)
+	{
+		return (typesValides.contains(triplet[triplet.length-2]) && !triplet[triplet.length-1].equals("<unknown>"));
+	}
+	
 }

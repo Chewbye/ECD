@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mkdir lemmatisation;
+
 for fichier in $1/*; do
 	if [ -d $fichier ]; then
 		nomDossier=$(basename $fichier);
