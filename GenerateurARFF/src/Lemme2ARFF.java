@@ -27,6 +27,9 @@ public class Lemme2ARFF {
 		typesValides.add("VBN");
 		typesValides.add("VBD");
 		typesValides.add("VBG");
+//		typesValides.add("JJ");
+//		typesValides.add("JJR");
+//		typesValides.add("JJS");
 		
 		arffContent = "% Ceci représente la classification de séries en fonction de leur genre.";
 		arffContent += "\n\n@relation series";
